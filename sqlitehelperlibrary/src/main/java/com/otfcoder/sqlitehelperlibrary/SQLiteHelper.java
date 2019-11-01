@@ -23,8 +23,13 @@ public class SQLiteHelper extends SQLiteOpenHelper {
             for (Table table: databaseConfig.TABLELIST) {
                 String tableString = "CREATE TABLE IF NOT EXISTS " + table.tableName + "(";
 
+                int length = table.fieldList.size();
+                int counter = 0;
                 for (Map.Entry<String, String> entry: table.fieldList.entrySet()) {
-                    tableString += entry.getKey() + " " + entry.getValue() + ",";
+                    tableString += entry.getKey() + " " + entry.getValue();
+                    if (counter < length-1)
+                        tableString += ", ";
+                    counter++;
                 }
 
                 tableString += ")";
