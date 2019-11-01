@@ -24,10 +24,10 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 String tableString = "CREATE TABLE IF NOT EXISTS " + table.tableName + "(";
 
                 int length = table.fieldList.size();
-                int counter = 0;
+                int counter = 1;
                 for (Map.Entry<String, String> entry: table.fieldList.entrySet()) {
                     tableString += entry.getKey() + " " + entry.getValue();
-                    if (counter < length-2)
+                    if (counter < length)
                         tableString += ", ";
                     counter++;
                 }
