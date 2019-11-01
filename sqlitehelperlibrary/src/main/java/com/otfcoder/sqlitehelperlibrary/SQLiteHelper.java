@@ -27,7 +27,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
                 int counter = 0;
                 for (Map.Entry<String, String> entry: table.fieldList.entrySet()) {
                     tableString += entry.getKey() + " " + entry.getValue();
-                    if (counter < length-1)
+                    if (counter < length-2)
                         tableString += ", ";
                     counter++;
                 }
