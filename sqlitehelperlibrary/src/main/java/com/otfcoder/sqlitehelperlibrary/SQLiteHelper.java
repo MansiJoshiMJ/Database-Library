@@ -63,7 +63,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         if(cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
                 for (Map.Entry<String, String> entry: table.fieldList.entrySet()) {
-                    dataList.put(entry.getKey(), cursor.getString(cursor.getColumnIndex(entry.getValue())));
+                    dataList.put(entry.getKey(), cursor.getString(cursor.getColumnIndex(entry.getKey())));
                 }
             }
         }
