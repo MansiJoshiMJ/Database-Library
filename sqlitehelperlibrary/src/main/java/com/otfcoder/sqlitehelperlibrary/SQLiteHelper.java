@@ -40,7 +40,7 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         }
     }
 
-    public long insertRecord(Table table) {
+    public boolean insertRecord(Table table) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -51,7 +51,32 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         long newRowId = db.insert(table.tableName, null, values);
         db.close();
 
-        return  newRowId;
+        return newRowId > 0;
+    }
+
+    public boolean updateRecord(Table table) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        for (Map.Entry<String, String> entry: table.fieldList.entrySet()) {
+            values.put(entry.getKey(), entry.getValue());
+        }
+
+        long newRowId = db.update(table.tableName, values, table.whereClause, table.whereArgs);
+
+        db.close();
+
+        return newRowId > 0;
+    }
+
+    public boolean deleteRecord(Table table) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long newRowId = db.delete(table.tableName, table.whereClause, table.whereArgs);
+
+        db.close();
+
+        return newRowId > 0;
     }
 
     public HashMap<String, String> getAllDataFromTable(Table table) {

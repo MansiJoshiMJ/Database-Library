@@ -3,7 +3,6 @@ package com.otfcoder.sqlitehelperlibrary;
 import android.content.Context;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class DatabaseConfiguration {
 
