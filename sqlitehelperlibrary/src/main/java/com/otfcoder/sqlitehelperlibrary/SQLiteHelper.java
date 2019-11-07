@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,7 +80,9 @@ public class SQLiteHelper extends SQLiteOpenHelper {
         return newRowId > 0;
     }
 
-    public HashMap<String, String> getAllDataFromTable(Table table) {
+    public ArrayList<HashMap<String, String>> getAllDataFromTable(Table table) {
+
+        ArrayList<HashMap<String, String>> allDataList = new ArrayList<>();
 
         HashMap<String, String> dataList = new HashMap<>();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -87,15 +90,17 @@ public class SQLiteHelper extends SQLiteOpenHelper {
 
         if(cursor.getCount() > 0) {
             while (cursor.moveToNext()) {
+                dataList = new HashMap<>();
                 for (Map.Entry<String, String> entry: table.fieldList.entrySet()) {
                     dataList.put(entry.getKey(), cursor.getString(cursor.getColumnIndex(entry.getKey())));
                 }
+                allDataList.add(dataList);
             }
         }
 
         db.close();
 
-        return dataList;
+        return allDataList;
     }
 
     @Override
